@@ -7,7 +7,7 @@ compileTshark=$compileTshark
 
 if [ "$$preInstall" = true ]; then
     echo "pre-install"
-    sudo apt-get install $$instalFirst
+    sudo apt-get --yes install $$instalFirst
 fi
 
 if [ "$$installChrome" = true ]; then
@@ -19,7 +19,7 @@ fi
 
 if [ "$$installPackages" = true ]; then
     echo "Installing packages"
-    sudo apt-get install $$toInstall
+    sudo apt-get --yes install $toInstall
 fi
 
 
@@ -41,11 +41,12 @@ sudo pip install python-daemon
 if [ "$$compileTshark" = true ]; then
     echo "Downloading wireshark"
     cd ..
-    wget $tsharkURL --no-check-certificate
-    tar -xvf wireshark-1.99.7.tar.bz2
-    cd wireshark-1.99.7
+    wget -N $tsharkURL --no-check-certificate
+    tar -xf wireshark-1.99.7.tar.bz2
+    cd wireshark-1.99.7/epan
     echo "Patching wireshark"
-    patch epan/proto.h < ../cwp-suite-setup/lable_limit.patch
+    patch -N proto.h < ../../cwp-suite-setup/label_limit.patch
+    cd ..
     ./autogen.sh
     ./configure --disable-wireshark --with-ssl --with-gnutls
     make -j2

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os, logging, argparse, platform, stat
+import os, logging, argparse, platform
 from string import Template
 
 try:
@@ -10,7 +10,7 @@ except ImportError as e:
 
 REQURIED_PACKAGES_PRE = 'wget'.split()
 
-REQURIED_PACKAGES_CWP = 'Xvfb google-chrome-stable nodejs-legacy nodejs tcpdump python-numpy scrot npm'.split()
+REQURIED_PACKAGES_CWP = 'xvfb google-chrome-stable nodejs-legacy nodejs tcpdump python-numpy scrot npm'.split()
 REQURIED_PACKAGES_H2A = 'python-pip python-dev libxml2-dev libxslt1-dev'.split()
 REQURIED_PACKAGES_TSHARK = 'libtool autoconf automake bison flex libglib2.0-dev libpcap-dev libgnutls-dev libssl-dev'.split()
 
@@ -69,7 +69,9 @@ def install(args):
 
     with open('install.sh', 'w') as script:
         script.write(result)
-    os.chmod('install.sh',stat.S_IXUSR)
+    os.chmod('install.sh', 0755)
+    logging.info('Done, please run ./install.sh')
+    
 
 def upgrade(_):
     logging.critical('Upgrade is not implemented yet.')
@@ -178,10 +180,10 @@ def check(args):
 def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter,\
                                      description='Chrome webpage profiler suite setup tool')
-    parser.add_argument('action', help='What to do: "install", "upgrade" or "check"')
+    parser.add_argument('action', nargs='?', default='install', help='What to do: "install", "upgrade" or "check"')
     parser.add_argument('--no-tshark', action='store_true', default=False, help='Do not compile tshark')
     parser.add_argument('-v', '--verbose', action='store_true', default=False, help='print debug infomation')
-    parser.add_argument('-q', '--quite', action='store_true', default=False, help='print nothing unless errors occur')
+    parser.add_argument('-q', '--quiet', action='store_true', default=False, help='print nothing unless errors occur')
     args = parser.parse_args()
 
     if args.quiet:
@@ -189,7 +191,7 @@ def main():
     elif args.verbose:
         level = logging.DEBUG
     else:
-        level = logging.WARNING
+        level = logging.INFO
     logging.basicConfig(
         format = "%(levelname)s:%(message)s",
         level = level
@@ -200,7 +202,11 @@ def main():
     elif args.action == 'upgrade':
         upgrade(args)
     elif args.action == 'check':
-        check(args)
+        rc = check(args)
+        if rc[0] == 0:
+            logging.info('OK. Looks Good.')
+        else:
+            logging.warning('There are problems')
     else:
         logging.critical("Unknown action %s", args.action)
 
