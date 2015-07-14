@@ -49,7 +49,11 @@ if [ "$$compileTshark" = true ]; then
     cd ..
     ./autogen.sh
     ./configure --disable-wireshark --with-ssl --with-gnutls
-    make -j2
+    echo "compiling tshark"
+    make -j4
 fi
+
+echo "Allowing TCP:8000"
+sudo iptables -I INPUT -i eth0 -p tcp --dport 8000 -m state --state NEW,ESTABLISHED -j ACCEPT
 
 echo 'Done'
