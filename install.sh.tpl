@@ -38,6 +38,9 @@ sudo pip install ../pyshark-ssl/src
 echo "Installing python-daemon"
 sudo pip install python-daemon
 
+echo "Installing selenium"
+sudo pip install selenium
+
 if [ "$$compileTshark" = true ]; then
     echo "Downloading wireshark"
     cd ..

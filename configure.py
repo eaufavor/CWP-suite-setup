@@ -10,7 +10,7 @@ except ImportError as e:
 
 REQURIED_PACKAGES_PRE = 'wget'.split()
 
-REQURIED_PACKAGES_CWP = 'xvfb google-chrome-stable nodejs-legacy nodejs tcpdump python-numpy scrot npm'.split()
+REQURIED_PACKAGES_CWP = 'xvfb google-chrome-stable nodejs-legacy nodejs tcpdump python-numpy scrot npm firefox'.split()
 REQURIED_PACKAGES_H2A = 'python-pip python-dev libxml2-dev libxslt1-dev'.split()
 REQURIED_PACKAGES_TSHARK = 'libtool autoconf automake bison flex libglib2.0-dev libpcap-dev libgnutls-dev libssl-dev'.split()
 
