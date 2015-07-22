@@ -38,6 +38,9 @@ sudo pip install ../pyshark-ssl/src
 echo "Installing python-daemon"
 sudo pip install python-daemon
 
+echo "Installing iso8601"
+sudo pip install iso8601
+
 echo "Installing selenium"
 sudo pip install selenium
 
