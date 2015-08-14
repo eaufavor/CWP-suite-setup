@@ -22,9 +22,10 @@ HAR_CAPTURER = os.path.abspath(r'../chrome-har-capturer-cache')
 PYSHARK = os.path.abspath(r'../pyshark-ssl')
 WEBUI = os.path.abspath(r'../chrome-webpage-profiler-webui')
 
-WIRESHAKR_URL='https://1.na.dl.wireshark.org/src/wireshark-1.99.7.tar.bz2'
+#WIRESHAKR_URL='https://1.na.dl.wireshark.org/src/wireshark-1.99.7.tar.bz2'
+WIRESHAKR_URL='https://1.na.dl.wireshark.org/src/wireshark-1.99.8.tar.bz2'
 
-TSHARK = os.path.abspath(r'..wireshark-1.99.7')
+TSHARK = os.path.abspath(r'../wireshark-1.99.8')
 
 def install(args):
     content = {}

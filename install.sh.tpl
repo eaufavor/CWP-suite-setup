@@ -48,7 +48,7 @@ if [ "$$compileTshark" = true ]; then
     echo "Downloading wireshark"
     cd ..
     wget -N $tsharkURL --no-check-certificate
-    tar -xf wireshark-1.99.7.tar.bz2
+    tar -xf wireshark-1.99.8.tar.bz2
     cd wireshark-1.99.7/epan
     echo "Patching wireshark"
     patch -N proto.h < ../../cwp-suite-setup/label_limit.patch
