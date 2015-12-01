@@ -5,7 +5,7 @@ from string import Template
 try:
     import apt
 except ImportError as e:
-    logging.critical("python-apt module is not installed. Maybe this is not Ubuntu.s")
+    logging.critical("python-apt module is not installed. Maybe this is not Ubuntu.")
     raise e
 
 REQURIED_PACKAGES_PRE = 'wget'.split()
